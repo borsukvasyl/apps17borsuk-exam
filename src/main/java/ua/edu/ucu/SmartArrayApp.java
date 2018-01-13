@@ -57,23 +57,7 @@ public class SmartArrayApp {
             findDistinctStudentNamesFrom2ndYearWithGPAgt4AndOrderedBySurname(final Student[] students) {
         SmartArray studentsArray = new BaseArray(students);
 
-        studentsArray = new FilterDecorator(studentsArray, new MyPredicate() {
-            private List<Student> resource = new ArrayList<Student>(Arrays.asList(students));
-
-            @Override
-            public boolean test(Object t) {
-                for (Object student : resource) {
-                    if (student.equals(t)) {
-                        if (student == t) {
-                            return true;
-                        }
-                        return false;
-                    }
-                }
-                return false;
-            }
-
-        });
+        studentsArray = new DistinctDecorator(studentsArray);
         studentsArray = new FilterDecorator(studentsArray, new MyPredicate() {
             @Override
             public boolean test(Object t) {
