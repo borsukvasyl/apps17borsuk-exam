@@ -1,6 +1,7 @@
 package ua.edu.ucu;
 
 import java.lang.reflect.Array;
+import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
 
@@ -57,19 +58,21 @@ public class SmartArrayApp {
         SmartArray studentsArray = new BaseArray(students);
 
         studentsArray = new FilterDecorator(studentsArray, new MyPredicate() {
-            private Object[] resource = students;
+            private List<Student> resource = new ArrayList<Student>(Arrays.asList(students));
 
             @Override
             public boolean test(Object t) {
-                int counter = 0;
-                Student thisStudent = (Student) t;
                 for (Object student : resource) {
                     if (student.equals(t)) {
-                        counter++;
+                        if (student == t) {
+                            return true;
+                        }
+                        return false;
                     }
                 }
-                return counter == 1;
+                return false;
             }
+
         });
         studentsArray = new FilterDecorator(studentsArray, new MyPredicate() {
             @Override
