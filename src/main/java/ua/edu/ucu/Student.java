@@ -32,6 +32,15 @@ class Student {
     }
 
     @Override
+    public boolean equals(Object obj) {
+        Student otherStudent = (Student) obj;
+        return this.getSurname().equals(otherStudent.getSurname()) &&
+                this.getName().equals(otherStudent.getName()) &&
+                this.getYear() == otherStudent.getYear() &&
+                this.getGPA() == otherStudent.getGPA();
+    }
+
+    @Override
     public String toString() {
         return "Student{name=" + name + ", surname=" + surname + ", " + "GPA=" + GPA + ", year=" + year + '}';
     }
